@@ -1,0 +1,42 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T20:33:53.672Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 1,
+    "implemented": 1,
+    "items": [
+      {
+        "id": "REQ-27",
+        "summary": "Update the admin credentials stored in the Motoko backend so that the admin username/phone is set to 'ADMIN' and the password is set to 'Mahendra7959'. This must be applied via the stable actor variable or one-time initialization mechanism already in place — not hardcoded in frontend source code. The admin login flow on the frontend (Login page) must continue to authenticate against the backend actor using these new credentials.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/Login.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/Login.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/pages/Login.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

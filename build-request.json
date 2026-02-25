@@ -1,0 +1,41 @@
+{
+  "kind": "build_request",
+  "title": "Update Admin Credentials to ADMIN / Mahendra7959",
+  "projectName": "Bhagavad Gita Saar",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-27",
+      "text": "Update the admin credentials stored in the Motoko backend so that the admin username/phone is set to 'ADMIN' and the password is set to 'Mahendra7959'. This must be applied via the stable actor variable or one-time initialization mechanism already in place — not hardcoded in frontend source code. The admin login flow on the frontend (Login page) must continue to authenticate against the backend actor using these new credentials.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "admin ka phone number may ADMIN kr do or possword may Mahendra7959 kro"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Motoko backend actor stores admin phone/username as 'ADMIN' and password as 'Mahendra7959' (hashed or via stable variable).",
+        "Logging in at /admin with phone 'ADMIN' and password 'Mahendra7959' successfully authenticates and grants admin access.",
+        "Logging in with the old credentials (e.g., 'admin' / 'admin123') no longer works.",
+        "No admin credentials are hardcoded or exposed in any frontend source file.",
+        "Invalid credentials still show a proper error message on the login page."
+      ]
+    }
+  ],
+  "constraints": [
+    "Admin credentials must be stored and validated in the Motoko backend, not in frontend code.",
+    "Do not change any immutable frontend paths: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui."
+  ],
+  "nonGoals": [
+    "Adding new admin panel features or tabs.",
+    "Changing the admin panel UI layout.",
+    "Modifying user registration or login flows."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

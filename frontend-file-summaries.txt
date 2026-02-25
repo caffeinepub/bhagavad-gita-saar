@@ -1,0 +1,15 @@
+{
+  "frontend/src/index.css": "Global CSS with OKLCH spiritual theme (saffron/gold/maroon/cream palette) and Google Fonts imports for Noto Serif Devanagari and Poppins.",
+  "frontend/tailwind.config.js": "Tailwind config extended with custom spiritual colors (saffron, gold, maroon, cream), Devanagari/sans font families, and spiritual shadow tokens.",
+  "frontend/src/pages/Dashboard.tsx": "Full customer dashboard with wallet stats, referral section (personal referral link + short website ShareableLink), and tabbed interface for UTR payment, withdrawal, recharge, and commission breakdown.",
+  "frontend/src/pages/BookContent.tsx": "Book content page showing all 18 Bhagavad Gita chapters with 100 Hindi points in an accordion layout; locked for non-activated users.",
+  "frontend/src/pages/Contact.tsx": "Contact page with name/email/message form that saves to localStorage, displays support email, and shows FAQ section.",
+  "frontend/src/pages/PrivacyPolicy.tsx": "Privacy policy page covering data privacy, cookies, payment information, referral/commission data usage, and user rights in Hindi.",
+  "frontend/src/pages/AdminPanel.tsx": "Admin panel with five tabs (UTR, Withdrawals, Recharges, Contacts, Users); the new Users tab shows a summary card with total registered user count from the backend, a paginated table listing each user's mobile number, active/inactive status badge, wallet balance, and registration date, with loading skeletons and error states.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend and localStorage operations; adds two new hooks `useAdminGetAllUsers()` and `useAdminGetUserCount()` that call the backend actor's `adminGetAllUsers()` and `adminGetUserCount()` methods respectively, with 10-second refetch intervals.",
+  "frontend/src/App.tsx": "Main app router config with all page routes including a new `/go` short route that redirects to the home page `/` using TanStack Router's Navigate component.",
+  "frontend/src/components/ShareableLink.tsx": "Reusable component that displays the site's short URL (`/go`) with a copy-to-clipboard button and success toast notification, styled with the spiritual saffron/maroon theme.",
+  "frontend/src/pages/Home.tsx": "Home page with hero section, book preview, features grid, commission structure, and CTA sections; now includes the ShareableLink component in the hero section for easy site sharing.",
+  "frontend/src/pages/Register.tsx": "Registration form page with phone, password, and referral code fields; now includes a ShareableLink component at the bottom of the card so new users can share the site link.",
+  "frontend/src/pages/Login.tsx": "Login page with phone/password form that handles both regular user login (via localStorage) and admin login (via backend `adminLogin` method with username \"ADMIN\" and password validated against backend credentials, using `AdminLoginResult` enum for response handling)."
+}

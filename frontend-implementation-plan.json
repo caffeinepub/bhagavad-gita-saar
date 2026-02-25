@@ -1,0 +1,25 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update Admin Credentials to ADMIN / Mahendra7959",
+  "requirements": [
+    {
+      "id": "REQ-27",
+      "summary": "Update admin credentials in backend to username 'ADMIN' and password 'Mahendra7959', ensuring the frontend login flow authenticates against these new credentials without hardcoding them in frontend source code.",
+      "acceptanceCriteria": [
+        "The Motoko backend actor stores admin phone/username as 'ADMIN' and password as 'Mahendra7959' (hashed or via stable variable).",
+        "Logging in at /admin with phone 'ADMIN' and password 'Mahendra7959' successfully authenticates and grants admin access.",
+        "Logging in with the old credentials (e.g., 'admin' / 'admin123') no longer works.",
+        "No admin credentials are hardcoded or exposed in any frontend source file.",
+        "Invalid credentials still show a proper error message on the login page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/Login.tsx",
+          "operation": "modify",
+          "description": "Review the admin login flow to ensure it correctly calls the backend adminLogin method with the username and password entered by the user. Verify that the login page does not contain any hardcoded admin credentials and properly handles the AdminLoginResult response from the backend, displaying appropriate error messages for invalid credentials."
+        }
+      ]
+    }
+  ]
+}

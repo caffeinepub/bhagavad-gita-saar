@@ -1,0 +1,324 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 11,
+  "summary": "Bhagavad Gita Saar website with user registration (phone+password+refercode), ₹100 payment to activate ID (UPI link + UTR submission), 10-level referral commission system (25/15/10/8/6/5/4/3/2/1%), customer wallet with withdrawal via UPI ID, mobile recharge from wallet (Jio/Airtel/Vi/BSNL, 24days/28days/data-pack), admin panel for managing withdrawals, recharges and UTR approvals. Content: Bhagavad Gita Saar 100 points across 18 chapters (in Hindi). Stack: Node.js/Express + MongoDB.",
+  "architectural_notes": [
+    "Stack: Node.js/Express backend, MongoDB database, HTML/CSS/JS frontend",
+    "MongoDB: index on 'mobile' field for fast duplicate-check queries",
+    "Payment: UPI link redirect + manual UTR submission (no Paytm gateway API); admin verifies UTR to activate ID",
+    "Commission: 10-level MLM tree stored per user; wallet updated on each referral purchase",
+    "Admin panel: separate admin login; manages UTR approvals, recharge requests, withdrawal requests",
+    "Recharge: admin manually enters amount and approves; amount deducted from customer wallet on approval; cancelled requests restore wallet balance",
+    "Production: use environment variables for admin credentials, JWT secret, MongoDB URI; never hardcode secrets"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-build-a-registration-page-with-a-form-requiring-three-mandatory-fields-phone-number-password-and-referral-code-show-inline-validation-errors-if-any-field-is-empty-or-if-phone-is-already-registered-or-referral-code-is-invalid-on-success-redirect-to-the-login-page-with-a-success-message-no-auto-login-after-registration",
+      "title": "Build a Registration page with a form requiring three mandatory fields: Phone Number, Password, and Referral Code. Show inline validation errors if any field is empty or if phone is already registered or referral code is invalid. On success, redirect to the Login page with a success message. No auto-login after registration.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-login-page-with-phone-number-and-password-fields-on-success-navigate-to-the-customer-dashboard-show-error-for-invalid-credentials-provide-a-link-to-the-registration-page",
+      "title": "Build a Login page with Phone Number and Password fields. On success, navigate to the Customer Dashboard. Show error for invalid credentials. Provide a link to the Registration page.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-customer-dashboard-with-the-following-sections-1-wallet-balance-displayed-prominently-2-commission-breakdown-showing-8-levels-with-amounts-earned-level-1-25-level-2-15-level-3-10-level-4-5-level-5-4-level-6-3-level-7-2-level-8-1-show-actual-rupee-amounts-earned-at-each-level-3-personal-referral-code-displayed-visible-only-after-id-activation-4-referral-link-section-showing-text-pay-100-and-get-your-refer-code-with-a-copyable-referral-link-5-a-note-displayed-above-the-payment-section-in-stylish-hindi-font-100-25-15-10-8-6-5-4-3-2-1-6-payment-activation-section-with-hyperlink-pay-100-rupees-and-activate-id-pointing-to-https-upilinks-in-payment-link-upi2039309601-and-a-utr-number-input-field-below-it-with-a-submit-button-this-utr-submission-is-shown-to-admin-7-withdrawal-section-upi-id-input-amount-input-request-withdrawal-button-active-only-if-wallet-100-8-mobile-recharge-section-described-in-req-10-show-personal-referral-code-and-referral-link-only-after-account-is-activated",
+      "title": "Build the Customer Dashboard with the following sections: (1) Wallet Balance displayed prominently. (2) Commission breakdown showing 8 levels with amounts earned: Level 1 (25%), Level 2 (15%), Level 3 (10%), Level 4 (5%), Level 5 (4%), Level 6 (3%), Level 7 (2%), Level 8 (1%) — show actual rupee amounts earned at each level. (3) Personal Referral Code displayed (visible only after ID activation). (4) Referral link section showing text 'Pay ₹100 and get your refer code' with a copyable referral link. (5) A note displayed above the payment section in stylish Hindi font: 'फ्री की वस्तु का उपयोग नहीं होता और खरीदी गई वस्तु का उपयोग करना पड़ता है इसलिए हम ₹100 चार्ज कर रहे हैं और अगर किसी को फ्री में इस भागवत गीता के सार को फ्री में किसी को भेजने को कहेंगे तो कोई नहीं करेगा इसलिए सभी लोगों तक पहुंचाने के लिए कमीशन इस प्रकार (25% 15% 10% 8% 6% 5% 4% 3% 2% 1%) दिया जाएगा ताकि भगवत गीता का सार हर व्यक्ति तक पहुंचा जा सके'. (6) Payment activation section with hyperlink 'Pay 100 Rupees and Activate ID' pointing to https://upilinks.in/payment-link/upi2039309601 and a UTR number input field below it with a submit button — this UTR submission is shown to admin. (7) Withdrawal section: UPI ID input + amount input + 'Request Withdrawal' button (active only if wallet ≥ ₹100). (8) Mobile Recharge section (described in REQ-10). Show personal referral code and referral link only after account is activated.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-mobile-recharge-section-within-the-customer-dashboard-display-a-note-above-the-section-recharge-hone-ke-baad-recharge-amount-customer-ke-wallet-se-kat-li-jayegi-fields-1-mobile-number-input-2-operator-selector-jio-airtel-vodafone-idea-vi-bsnl-3-validity-selector-28-days-24-days-data-pack-4-if-data-pack-is-selected-show-a-secondary-option-1gb-day-or-1-5gb-day-5-send-recharge-request-button-below-the-button-show-a-hindi-note-recharge-request-bhejne-ke-baad-jyada-se-jyada-12-ghante-ka-samay-lag-sakta-hai-enforce-plan-recharge-28days-24days-requires-wallet-150-data-pack-recharge-requires-wallet-20-show-a-list-of-the-user-s-past-recharge-requests-with-their-status",
+      "title": "Build the Mobile Recharge section within the Customer Dashboard. Display a note above the section: 'Recharge hone ke baad recharge amount customer ke wallet se kat li jayegi'. Fields: (1) Mobile Number input. (2) Operator selector: Jio, Airtel, Vodafone-Idea (Vi), BSNL. (3) Validity selector: 28 Days, 24 Days, Data Pack. (4) If Data Pack is selected, show a secondary option: 1GB/day or 1.5GB/day. (5) 'Send Recharge Request' button. Below the button, show a Hindi note: 'Recharge request bhejne ke baad jyada se jyada 12 ghante ka samay lag sakta hai'. Enforce: plan recharge (28days/24days) requires wallet ≥ ₹150; data-pack recharge requires wallet ≥ ₹20. Show a list of the user's past recharge requests with their status.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-admin-panel-accessible-via-a-separate-admin-login-admin-panel-sections-1-utr-submissions-list-of-customers-with-utr-numbers-and-phone-numbers-approve-activates-account-triggers-commissions-and-reject-buttons-2-withdrawal-requests-customer-phone-wallet-balance-requested-amount-upi-id-approve-and-reject-buttons-3-recharge-requests-customer-phone-mobile-number-operator-validity-type-data-pack-option-admin-enters-the-recharge-amount-approve-deducts-from-wallet-and-cancel-restores-wallet-buttons-4-contact-queries-list-of-submitted-name-email-message-entries-all-lists-are-paginated-or-scrollable",
+      "title": "Build the Admin Panel (accessible via a separate /admin login). Admin panel sections: (1) UTR Submissions: list of customers with UTR numbers and phone numbers; Approve (activates account, triggers commissions) and Reject buttons. (2) Withdrawal Requests: customer phone, wallet balance, requested amount, UPI ID; Approve and Reject buttons. (3) Recharge Requests: customer phone, mobile number, operator, validity type, data-pack option; admin enters the recharge amount; Approve (deducts from wallet) and Cancel (restores wallet) buttons. (4) Contact Queries: list of submitted name/email/message entries. All lists are paginated or scrollable.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-book-content-page-accessible-after-login-and-account-activation-display-the-full-bhagavad-gita-saar-content-100-points-across-18-chapters-in-hindi-each-chapter-should-have-a-heading-and-its-bullet-points-listed-clearly-chapters-chapter-1-arjun-vishad-yog-5-points-chapter-2-sankhya-yog-5-points-chapter-3-karm-yog-5-points-chapter-4-gyan-karm-sanyas-yog-5-points-chapter-5-karm-sanyas-yog-5-points-chapter-6-dhyan-yog-5-points-chapter-7-gyan-vigyan-yog-5-points-chapter-8-akshar-brahm-yog-5-points-chapter-9-raj-vidya-raj-guhya-yog-5-points-chapter-10-vibhuti-yog-5-points-chapter-11-vishwaroop-darshan-yog-5-points-chapter-12-bhakti-yog-5-points-chapter-13-kshetra-kshetragya-vibhag-yog-5-points-chapter-14-gun-tray-vibhag-yog-5-points-chapter-15-purushottam-yog-5-points-chapter-16-daivasur-sampad-vibhag-yog-5-points-chapter-17-shraddha-tray-vibhag-yog-5-points-chapter-18-moksha-sanyas-yog-15-points-use-the-exact-hindi-content-provided-by-the-user",
+      "title": "Build a Book Content page accessible after login and account activation. Display the full Bhagavad Gita Saar content: 100 points across 18 chapters in Hindi. Each chapter should have a heading and its bullet points listed clearly. Chapters: Chapter 1 (Arjun Vishad Yog, 5 points), Chapter 2 (Sankhya Yog, 5 points), Chapter 3 (Karm Yog, 5 points), Chapter 4 (Gyan Karm Sanyas Yog, 5 points), Chapter 5 (Karm Sanyas Yog, 5 points), Chapter 6 (Dhyan Yog, 5 points), Chapter 7 (Gyan Vigyan Yog, 5 points), Chapter 8 (Akshar Brahm Yog, 5 points), Chapter 9 (Raj Vidya Raj Guhya Yog, 5 points), Chapter 10 (Vibhuti Yog, 5 points), Chapter 11 (Vishwaroop Darshan Yog, 5 points), Chapter 12 (Bhakti Yog, 5 points), Chapter 13 (Kshetra Kshetragya Vibhag Yog, 5 points), Chapter 14 (Gun Tray Vibhag Yog, 5 points), Chapter 15 (Purushottam Yog, 5 points), Chapter 16 (Daivasur Sampad Vibhag Yog, 5 points), Chapter 17 (Shraddha Tray Vibhag Yog, 5 points), Chapter 18 (Moksha Sanyas Yog, 15 points). Use the exact Hindi content provided by the user.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-contact-page-with-a-form-containing-fields-name-email-message-and-a-submit-button-on-submission-save-the-query-to-the-backend-display-support-email-bhagavadgitamargs-gmail-com-on-this-page-show-a-success-confirmation-message-after-submission",
+      "title": "Build a Contact page with a form containing fields: Name, Email, Message, and a Submit button. On submission, save the query to the backend. Display support email bhagavadgitamargs@gmail.com on this page. Show a success confirmation message after submission.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-privacy-policy-page-covering-data-privacy-policy-cookies-usage-payment-information-handling-and-referral-commission-data-usage",
+      "title": "Build a Privacy Policy page covering: data privacy policy, cookies usage, payment information handling, and referral/commission data usage.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-cohesive-spiritual-and-premium-visual-theme-across-the-entire-site-use-warm-saffron-gold-and-deep-maroon-as-primary-colors-with-cream-off-white-backgrounds-typography-should-use-a-decorative-serif-or-devanagari-friendly-font-for-headings-and-a-clean-sans-serif-for-body-text-the-landing-home-page-should-feature-a-hero-section-with-the-book-title-100-a-brief-description-and-a-call-to-action-to-register-navigation-should-include-links-to-home-login-register-contact-and-privacy-policy-apply-consistent-styling-to-cards-buttons-and-form-elements-throughout",
+      "title": "Apply a cohesive spiritual and premium visual theme across the entire site. Use warm saffron/gold and deep maroon as primary colors, with cream/off-white backgrounds. Typography should use a decorative serif or Devanagari-friendly font for headings and a clean sans-serif for body text. The landing/home page should feature a hero section with the book title 'भगवद्गीता का सार: 100 बिंदुओं का वर्णन', a brief description, and a call-to-action to register. Navigation should include links to Home, Login, Register, Contact, and Privacy Policy. Apply consistent styling to cards, buttons, and form elements throughout.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-migrate-all-user-data-wallet-balances-utr-submissions-withdrawal-requests-recharge-requests-commission-ledger-and-contact-queries-from-localstorage-to-the-motoko-backend-actor-with-stable-storage-stable-var-stable-hashmap-the-frontend-must-read-and-write-all-data-exclusively-through-canister-query-update-calls-remove-all-localstorage-based-persistence-logic-from-frontend-src-lib-auth-ts-and-replace-with-backend-actor-calls-via-the-existing-useactor-hook",
+      "title": "Migrate all user data, wallet balances, UTR submissions, withdrawal requests, recharge requests, commission ledger, and contact queries from localStorage to the Motoko backend actor with stable storage (stable var / stable HashMap). The frontend must read and write all data exclusively through canister query/update calls. Remove all localStorage-based persistence logic from frontend/src/lib/auth.ts and replace with backend actor calls via the existing useActor hook.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-hardcoded-default-admin-credentials-phone-admin-password-admin123-with-a-securely-configured-admin-account-stored-in-the-motoko-backend-the-admin-credentials-must-be-set-via-a-one-time-initialization-call-or-stable-actor-variable-never-hardcoded-in-frontend-source-code-the-admin-login-flow-must-authenticate-against-the-backend-actor-not-a-client-side-check",
+      "title": "Replace the hardcoded default admin credentials (phone: 'admin', password: 'admin123') with a securely configured admin account stored in the Motoko backend. The admin credentials must be set via a one-time initialization call or stable actor variable — never hardcoded in frontend source code. The admin login flow must authenticate against the backend actor, not a client-side check.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-proper-session-token-management-on-the-frontend-on-login-generate-and-store-a-short-lived-session-token-or-use-the-backend-returned-session-identifier-in-memory-or-sessionstorage-not-localstorage-on-logout-or-tab-close-clear-the-session-protect-all-dashboard-and-admin-routes-so-that-unauthenticated-users-are-redirected-to-the-login-page",
+      "title": "Implement proper session token management on the frontend. On login, generate and store a short-lived session token (or use the backend-returned session identifier) in memory or sessionStorage (not localStorage). On logout or tab close, clear the session. Protect all dashboard and admin routes so that unauthenticated users are redirected to the login page.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-harden-the-frontend-build-for-production-ensure-all-api-error-responses-are-handled-gracefully-with-user-friendly-toast-messages-replace-all-console-log-console-error-debug-statements-with-silent-error-handling-and-verify-that-no-sensitive-data-credentials-admin-tokens-is-logged-to-the-browser-console",
+      "title": "Harden the frontend build for production: ensure all API error responses are handled gracefully with user-friendly toast messages, replace all console.log/console.error debug statements with silent error handling, and verify that no sensitive data (credentials, admin tokens) is logged to the browser console.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-the-admin-panel-ui-add-a-new-users-tab-that-displays-1-a-prominently-styled-summary-card-showing-the-total-number-of-registered-users-2-a-scrollable-paginated-table-listing-all-registered-users-with-columns-phone-number-account-status-active-inactive-wallet-balance-and-registration-date-the-data-must-be-fetched-from-the-backend-via-the-admingetallusers-and-admingetusercount-functions",
+      "title": "In the Admin Panel UI, add a new 'Users' tab that displays: (1) A prominently styled summary card showing the total number of registered users. (2) A scrollable/paginated table listing all registered users with columns: Phone Number, Account Status (Active / Inactive), Wallet Balance (₹), and Registration Date. The data must be fetched from the backend via the `adminGetAllUsers()` and `adminGetUserCount()` functions.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-dedicated-short-memorable-url-path-e-g-go-or-join-on-the-frontend-that-immediately-redirects-visitors-to-the-home-page-display-this-short-link-prominently-on-the-home-page-dashboard-referral-section-and-registration-page-so-users-can-easily-copy-and-share-it-the-displayed-shareable-link-should-use-the-current-canister-url-combined-with-the-short-path-e-g-https-canister-id-icp0-io-go-include-a-one-click-copy-button-next-to-the-displayed-short-link",
+      "title": "Add a dedicated short/memorable URL path (e.g., `/go` or `/join`) on the frontend that immediately redirects visitors to the home page (`/`). Display this short link prominently on the Home page, Dashboard referral section, and Registration page so users can easily copy and share it. The displayed shareable link should use the current canister URL combined with the short path (e.g., `https://<canister-id>.icp0.io/go`). Include a one-click copy button next to the displayed short link.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-admin-credentials-stored-in-the-motoko-backend-so-that-the-admin-username-phone-is-set-to-admin-and-the-password-is-set-to-mahendra7959-this-must-be-applied-via-the-stable-actor-variable-or-one-time-initialization-mechanism-already-in-place-not-hardcoded-in-frontend-source-code-the-admin-login-flow-on-the-frontend-login-page-must-continue-to-authenticate-against-the-backend-actor-using-these-new-credentials",
+      "title": "Update the admin credentials stored in the Motoko backend so that the admin username/phone is set to 'ADMIN' and the password is set to 'Mahendra7959'. This must be applied via the stable actor variable or one-time initialization mechanism already in place — not hardcoded in frontend source code. The admin login flow on the frontend (Login page) must continue to authenticate against the backend actor using these new credentials.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "User registration with phone, password, refer code (mandatory); no duplicate registration per number; data saved on server",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Login and registration both options on site; after registration user must login",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "₹100 payment to activate ID via UPI link (https://upilinks.in/payment-link/upi2039309601); UTR number input below payment link shown to admin",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "10-level referral commission system: L1=25%, L2=15%, L3=10%, L4=8%, L5=6%, L6=5%, L7=4%, L8=3%, L9=2%, L10=1%",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Customer dashboard showing wallet balance, personal referral code, commission level-wise (8 levels: 25,15,10,5,4,3,2,1), referral link with 'Pay ₹100 and get refer code' text",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Withdrawal request: minimum ₹100 in wallet, customer enters UPI ID, request shown to admin with UPI ID",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Mobile recharge from wallet: mobile number input, operator (Jio/Airtel/Vi/BSNL), validity (28days/24days/data-pack); data-pack shows 1GB/1.5GB per day options; min ₹150 for plan recharge, min ₹20 for data pack; admin approves with amount entry which deducts from wallet; cancel restores wallet; note shown above recharge section",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Admin panel: view UTR submissions, approve/reject recharge requests, view withdrawal requests with customer UPI ID",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Dashboard note above payment option in stylish font: 'फ्री की वस्तु का उपयोग नहीं होता...' explaining ₹100 charge and commission rationale",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Contact page with query form (/contact route), privacy policy page, support email bhagavadgitamargs@gmail.com, SSL/HTTPS, MongoDB indexes on mobile field, minified static files",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Build a Motoko backend actor with the following data models and logic: (1) User: phone number (unique key), hashed password, referral code (auto-generated on activation), referredBy (referral code used at registration), isActive (bool), wallet balance (Nat), UPI ID (optional), createdAt. (2) ReferralTree: store up to 10-level upline chain per user for commission calculation. (3) CommissionLedger: records per commission event (userId, amount, level, fromUser, timestamp). (4) WithdrawalRequest: userId, amount, UPI ID, status (pending/approved/rejected), timestamp. (5) RechargeRequest: userId, mobile number, operator (Jio/Airtel/Vi/BSNL), validity (28days/24days/data-pack), dataPack option (1GB/1.5GB per day, optional), adminAmount (Nat, filled by admin), status (pending/approved/rejected/cancelled), timestamp. (6) ContactQuery: name, email, message, timestamp. (7) UTRSubmission: userId, utrNumber, timestamp, status (pending/approved/rejected). Enforce unique phone registration — reject duplicate registration attempts. Auto-generate a unique personal referral code for each user upon ID activation.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Implement backend functions for user registration and login: register(phone, password, referCode) — validates all three fields are non-empty, checks phone uniqueness, stores user (inactive), records referredBy chain up to 10 levels. login(phone, password) — validates credentials, returns session token or principal. Reject registration if referCode is invalid or any field is missing.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Implement backend payment activation flow: submitUTR(userId, utrNumber) — saves UTR submission linked to user, marks request as pending. Admin function adminApproveUTR(userId) — activates user account (isActive = true), generates personal referral code, triggers commission distribution up the referral chain. Commission levels: L1=25%, L2=15%, L3=10%, L4=8%, L5=6%, L6=5%, L7=4%, L8=3%, L9=2%, L10=1% of ₹100 payment, credited to respective upline wallet balances.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Implement backend wallet and withdrawal functions: getWalletBalance(userId) — returns current balance. requestWithdrawal(userId, upiId, amount) — validates minimum ₹100 in wallet, creates withdrawal request with UPI ID. Admin functions: adminGetWithdrawalRequests() — returns all pending requests with UPI IDs. adminApproveWithdrawal(requestId) — deducts amount from wallet, marks approved. adminRejectWithdrawal(requestId) — marks rejected, does not deduct.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Implement backend mobile recharge request functions: requestRecharge(userId, mobileNumber, operator, validityType, dataPackOption?) — validates: for plan recharge (28days/24days) minimum ₹150 wallet balance; for data-pack minimum ₹20 wallet balance; saves request as pending. Admin functions: adminGetRechargeRequests() — returns all pending requests with full details. adminApproveRecharge(requestId, amount) — deducts admin-entered amount from user wallet, marks approved. adminCancelRecharge(requestId) — marks cancelled, restores any pre-held amount to wallet. dataPackOption values: '1GB' or '1.5GB per day'.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Implement backend contact query and admin query retrieval: submitContactQuery(name, email, message) — saves to ContactQuery store. adminGetContactQueries() — returns all submitted queries.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Prepare app for production: secure admin credentials (not default), environment variables for secrets, production-ready configuration",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Implement stable storage upgrades in the Motoko backend using preupgrade/postupgrade hooks so that all actor state (users, commissions, requests, contact queries) survives canister upgrades without data loss. Create migration.mo only if existing stored data schemas need transformation.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Enforce access control on all sensitive backend functions. Only the canister controller / initialized admin principal may call adminApproveUTR, adminApproveWithdrawal, adminRejectWithdrawal, adminApproveRecharge, adminCancelRecharge, adminGetWithdrawalRequests, adminGetRechargeRequests, and adminGetContactQueries. All other callers must receive an #Unauthorized error.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Add input validation and rate-limit guards on the backend for all public-facing update calls: register, login, submitUTR, requestWithdrawal, requestRecharge, and submitContactQuery. Validate that phone numbers are exactly 10 digits, amounts are positive Nat values, UTR numbers are non-empty strings, and operator/validity values are within allowed enums. Return descriptive error variants for each validation failure.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Implement commission distribution logic fully in the Motoko backend. When adminApproveUTR is called for a user, traverse up the referral chain up to 10 levels using the stored referredBy chain, credit each upline wallet with the correct percentage of ₹100 (L1=25, L2=15, L3=10, L4=8, L5=6, L6=5, L7=4, L8=3, L9=2, L10=1 rupees), and record each commission event in the CommissionLedger with userId, fromUser, level, amount, and timestamp.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Admin panel: show total registered users count and list of all registered user mobile numbers",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Add a backend query function `adminGetAllUsers()` that returns a list of all registered users, including each user's phone number, activation status (isActive), wallet balance, and registration timestamp. Also add `adminGetUserCount()` that returns the total number of registered users as a Nat.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Create a short/simple URL or URL shortener for the website link so users can easily access and share the site without a custom domain",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Set admin login credentials: phone/username = 'ADMIN', password = 'Mahendra7959'",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Bhagavad Gita Saar",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
