@@ -394,12 +394,9 @@ export default function Dashboard() {
                   style={{ border: "3px solid oklch(0.75 0.18 65 / 0.6)" }}
                 >
                   <img
-                    src="/assets/generated/payment-qr.dim_400x450.png"
+                    src="/assets/uploads/qr-cod-2-1.jpeg"
                     alt="Payment QR Code"
                     className="w-80 h-auto"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = "none";
-                    }}
                   />
                 </div>
                 <p className="text-xs mt-2" style={labelStyle}>
